@@ -31,7 +31,7 @@ namespace free_azure.api
                 {
 
                     var postEvent = await JsonSerializer.DeserializeAsync<Event>(req.Body);
-                    postEvent.PartitionKey = "1";
+                    // postEvent.PartitionKey = "1";
                     await this.dbContext.Events.AddAsync(postEvent);
                     await this.dbContext.SaveChangesAsync();
                     return new OkResult();

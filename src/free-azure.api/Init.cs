@@ -27,6 +27,7 @@ namespace free_azure.api
             try
             {
                 log.LogInformation("Init db.");
+                await this.dbContext.Database.EnsureDeletedAsync();
                 await this.dbContext.Database.EnsureCreatedAsync();
                 return new OkResult();    
             }
