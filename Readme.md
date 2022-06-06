@@ -74,3 +74,29 @@ npx swa start
 ```
 
 This will start this project. Currently only the blazor frontend is usable, because the function API is empty. We will change this now.
+
+### Intruduction to the project
+
+This project is a simple time planing app. So you can create events at locations and a location can only be used for a single event to a given time.
+
+### add some functions
+
+> If you just use the Codespace or the remote containers extension then you don't need to install anything. But for all the other people, you will need for the following steps a `CosmosDB` host. It can be the emulater or a real CosmosDB.
+
+First open a terminal an go to the API project
+
+```bash
+cd ./src/free-azure.api/
+```
+
+Then let add a simple function to list all events:
+
+```bash
+func new --template "Http Trigger" --name Events --force
+```
+
+This creates a new `Events.cs` file. In this file we now want to make a connection to the configured cosmos db. First let add some EF Core to make lifes easyier:
+
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Cosmos
+```
