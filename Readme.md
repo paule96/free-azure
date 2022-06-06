@@ -51,6 +51,8 @@ dotnet sln add ./src/free-azure.api/free-azure_api.csproj
 dotnet sln add ./src/free-azure.frontend/free-azure.frontend.csproj
 ```
 
+> Information: If you didn't generate the HTTPS cert do it with `dotnet dev-certs https --trust`.
+
 ### add the SWA configuraiton for the project
 
 We run the following assistant:

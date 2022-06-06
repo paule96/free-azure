@@ -32,7 +32,8 @@
 		"ms-dotnettools.csharp",
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-azuretools.vscode-bicep",
-		"ms-azure-devops.azure-pipelines"
+		"ms-azure-devops.azure-pipelines",
+		"ms-dotnettools.blazorwasm-companion"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
