@@ -36,6 +36,7 @@ namespace free_azure.api
                         return new HttpClient(httpMessageHandler);
                     }
                 );
+                o.ConnectionMode(Microsoft.Azure.Cosmos.ConnectionMode.Gateway);
             });
         }
     }
