@@ -1,0 +1,14 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "free-azure": {
+      "appLocation": "src\\free-azure.frontend",
+      "apiLocation": "src\\free-azure.api",
+      "outputLocation": "bin\\wwwroot",
+      "appBuildCommand": "dotnet publish -c Release -o bin",
+      "apiBuildCommand": "dotnet publish -c Release",
+      "run": "dotnet watch run",
+      "appDevserverUrl": "http://localhost:8000"
+    }
+  }
+}
