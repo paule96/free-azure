@@ -66,7 +66,7 @@ namespace free_azure.api
                     if (alreadyBooked)
                     {
                         var events = await query
-                            .Select(e => $"{e.Name}, {e.Id}")
+                            .Select(e => $"'{e.Name}', {e.Id}")
                             .ToListAsync();
                         var messageString = string.Join(" | ", events);
                         return new ConflictObjectResult(
