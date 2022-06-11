@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -10,9 +9,7 @@ using free_azure.api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Linq;
-using Microsoft.Azure.Cosmos;
 using System.Net;
-using System.Web.Http;
 
 namespace free_azure.api
 {
@@ -81,7 +78,6 @@ namespace free_azure.api
                     }
                 }
                 return new OkResult();
-
             }
             catch (Exception ex)
             {

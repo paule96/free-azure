@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace free_azure.api.Models
 {
     public class Location
