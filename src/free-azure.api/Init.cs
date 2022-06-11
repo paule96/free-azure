@@ -29,14 +29,12 @@ namespace free_azure.api
                 log.LogInformation("Init db.");
                 await this.dbContext.Database.EnsureDeletedAsync();
                 await this.dbContext.Database.EnsureCreatedAsync();
-                return new OkResult();    
+                return new OkResult();
             }
             catch (System.Exception ex)
             {
-                
                 throw ex;
             }
-            
         }
     }
 }

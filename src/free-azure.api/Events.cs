@@ -39,7 +39,9 @@ namespace free_azure.api
                 else
                 {
                     log.LogInformation("try to create a list of events now.");
-                    var result = await this.dbContext.Events.ToListAsync();
+                    var result = await this.dbContext
+                        .Events
+                        .ToListAsync();
                     return new OkObjectResult(result);
                 }
             }
