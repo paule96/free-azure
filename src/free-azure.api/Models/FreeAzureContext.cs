@@ -13,6 +13,12 @@ namespace free_azure.api.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Event>()
+                .OwnsMany(
+                    ownedType: typeof(Location),
+                    navigationName: nameof(Event.Locations)
+                )
+                .WithOwner();
         }
     }
 }
