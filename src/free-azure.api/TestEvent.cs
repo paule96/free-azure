@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Linq;
 using Microsoft.Azure.Cosmos;
+using System.Net;
+using System.Web.Http;
 
 namespace free_azure.api
 {
@@ -69,8 +71,12 @@ namespace free_azure.api
                             .Select(e => $"'{e.Name}', {e.Id}")
                             .ToListAsync();
                         var messageString = string.Join(" | ", events);
+                        var problem =  new ProblemDetails();
+                        problem.Status = (int)HttpStatusCode.Conflict;
+                        problem.Title = "Location already booked.";
+                        problem.Detail = $"The event is not possible, because it is in the same time like: {messageString}";
                         return new ConflictObjectResult(
-                            $"The event is not possible, because it is in the same time like: {messageString}"
+                            problem
                         );
                     }
                 }
