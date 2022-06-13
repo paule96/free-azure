@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using free_azure.api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using free_azure.shared;
 
 namespace free_azure.api
 {

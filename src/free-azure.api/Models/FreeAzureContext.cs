@@ -1,3 +1,4 @@
+using free_azure.shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace free_azure.api.Models

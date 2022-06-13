@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "free-azure_api", "src\free-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "free-azure.frontend", "src\free-azure.frontend\free-azure.frontend.csproj", "{746DE902-DC0B-4403-BD09-1DDDA47390F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "free-azure.shared", "src\free-azure.shared\free-azure.shared.csproj", "{5341B4C6-B83E-4E82-A1B0-E3E6CEC85CB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{746DE902-DC0B-4403-BD09-1DDDA47390F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{746DE902-DC0B-4403-BD09-1DDDA47390F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{746DE902-DC0B-4403-BD09-1DDDA47390F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5341B4C6-B83E-4E82-A1B0-E3E6CEC85CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5341B4C6-B83E-4E82-A1B0-E3E6CEC85CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5341B4C6-B83E-4E82-A1B0-E3E6CEC85CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5341B4C6-B83E-4E82-A1B0-E3E6CEC85CB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4606D4AC-5953-413A-AF6A-2AE33BC33949} = {A5D9D644-0ED9-40BA-8BF2-5724EA94B3F0}
 		{746DE902-DC0B-4403-BD09-1DDDA47390F4} = {A5D9D644-0ED9-40BA-8BF2-5724EA94B3F0}
+		{5341B4C6-B83E-4E82-A1B0-E3E6CEC85CB5} = {A5D9D644-0ED9-40BA-8BF2-5724EA94B3F0}
 	EndGlobalSection
 EndGlobal
