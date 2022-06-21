@@ -8,7 +8,9 @@
       "appBuildCommand": "dotnet publish -c Release -o bin",
       "apiBuildCommand": "dotnet publish -c Release",
       "run": "dotnet watch run",
-      "appDevserverUrl": "https://localhost:7120"
+      "appDevserverUrl": "https://localhost:7120",
+      "appName": "free-azure",
+      "resourceGroupName": "free-azure-rg"
     }
   }
 }
