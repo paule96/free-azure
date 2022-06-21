@@ -9,7 +9,7 @@ services:
     command: [
         "/bin/sh",
         "-c",
-        "cd /workspace/ && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && cd /workspace/ && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && dotnet dev-certs https && npm install && while sleep 1000; do :; done"
+        "cd /workspace/ && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && cd /workspace/ && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && dotnet dev-certs https && while sleep 1000; do :; done"
       ]
     # command: ["/bin/sh", "-c", "while sleep 1000; do :; done"]
     user: vscode
