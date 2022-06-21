@@ -100,3 +100,98 @@ This creates a new `Events.cs` file. In this file we now want to make a connecti
 ```bash
 dotnet add package Microsoft.EntityFrameworkCore.Cosmos
 ```
+
+Now you can create a DBContext. The DbContext manges the connection to the database and translates the LINQ C# Syntax to SQL. An example of an DBConetext can be found in `src/free-azure.api/Models/FreeAzureContext.cs`
+
+Now we have a database defintion and a functions project. Now we can continue writing our function. The sample file can be found here: `src/free-azure.api/Events.cs`.
+
+In this file is the function `Events` that accepts GET and POST HTTP Requests. If the caller sends a post, it will create an event and if the caller sends a get it will list all events.
+
+```csharp
+[FunctionName("Events")]
+public async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+    ILogger log)
+{
+    try
+    {
+        if (req.Method == HttpMethods.Post)
+        {
+            var postEvent = await JsonSerializer.DeserializeAsync<Event>(req.Body);
+            await this.dbContext.Events.AddAsync(postEvent);
+            await this.dbContext.SaveChangesAsync();
+            return new OkResult();
+        }
+        else
+        {
+            log.LogInformation("try to create a list of events now.");
+            var result = await this.dbContext
+                .Events
+                .ToListAsync();
+            return new OkObjectResult(result);
+        }
+    }
+    catch (Exception ex)
+    {
+        throw ex;
+    }
+}
+```
+
+### Build the frontend
+
+The frontend is pretty easy because it's just C# in this sample. So we can easyly share all the models from the backend in the frontend. And there is another good thing: the sample Blazor project has a `Fetch data` page alread.(src/free-azure.frontend/Pages/FetchData) Let's rewrite this page quickly.
+
+First lets change all types from `WeatherForcast` to `Event`.
+And change the request to `api/Events`. Also make some changes to the html table:
+
+```csharp
+@page "/fetchdata"
+@inject HttpClient Http
+
+<PageTitle>Events</PageTitle>
+
+<h1>Events</h1>
+
+<p>This component demonstrates fetching Events from the server.</p>
+
+@if (sampleEvents == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Name</th>
+                <th>Locations</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sampleEvent in sampleEvents)
+            {
+                <tr>
+                    <td>@sampleEvent.Start.ToShortDateString()</td>
+                    <td>@sampleEvent.End.ToShortDateString()</td>
+                    <td>@sampleEvent.Name</td>
+                    <td>@sampleEvent.Locations</td>
+                    <td>@sampleEvent.Duration</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private free_azure.shared.Event[]? sampleEvents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        sampleEvents = await Http.GetFromJsonAsync<free_azure.shared.Event[]>("api/Events");
+    }
+}
+```
