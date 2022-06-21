@@ -29,7 +29,11 @@ namespace free_azure.api
             {
                 if (req.Method == HttpMethods.Post)
                 {
-                    var postEvent = await JsonSerializer.DeserializeAsync<Event>(req.Body);
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    var postEvent = await JsonSerializer.DeserializeAsync<Event>(req.Body, options);
                     await this.dbContext.Events.AddAsync(postEvent);
                     await this.dbContext.SaveChangesAsync();
                     return new OkResult();

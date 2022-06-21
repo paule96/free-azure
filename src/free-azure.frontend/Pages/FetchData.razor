@@ -1,5 +1,7 @@
 ﻿@page "/fetchdata"
+@using free_azure.frontend.Services;
 @inject HttpClient Http
+@inject EventsService service
 
 <PageTitle>Events</PageTitle>
 
@@ -30,7 +32,7 @@ else
                     <td>@sampleEvent.Start.ToShortDateString()</td>
                     <td>@sampleEvent.End.ToShortDateString()</td>
                     <td>@sampleEvent.Name</td>
-                    <td>@sampleEvent.Locations</td>
+                    @* <td>@sampleEvent.Locations</td> *@
                     <td>@sampleEvent.Duration</td>
                 </tr>
             }
@@ -39,10 +41,10 @@ else
 }
 
 @code {
-    private free_azure.shared.Event[]? sampleEvents;
+    private IEnumerable<free_azure.shared.Event>? sampleEvents;
 
     protected override async Task OnInitializedAsync()
     {
-        sampleEvents = await Http.GetFromJsonAsync<free_azure.shared.Event[]>("api/Events");
+        sampleEvents = await service.GetEvents();
     }
 }

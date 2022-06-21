@@ -1,0 +1,55 @@
+@page "/new"
+@using Microsoft.Extensions.Logging
+@using free_azure.frontend.Services
+@using free_azure.shared
+@inject ILogger<NewEvent> Logger
+@inject EventsService service
+
+<PageTitle>New events</PageTitle>
+
+<h1>New events</h1>
+
+
+<EditForm Model="@eventModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+        Name: 
+        <InputText id="name" @bind-Value="eventModel.Name" />
+        </label>
+    </p>
+    <p>
+        <label>
+        Start: 
+        <InputDate id="start" @bind-Value="eventModel.Start" />
+        </label>
+    </p>
+    <p>
+        <label>
+        End: 
+        <InputDate id="end" @bind-Value="eventModel.End" />
+        </label>
+    </p>
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private free_azure.shared.Event eventModel = new();
+
+    private async Task HandleValidSubmit()
+    {
+        Logger.LogInformation("HandleValidSubmit called");
+
+        // Process the valid form
+        eventModel.Locations = new List<Location>(){
+            new Location(){
+                Name = "test",
+                Virtual = true
+            }
+        };
+        eventModel.Id = new Random().Next(0,int.MaxValue);
+        await service.CreateEvent(eventModel);
+        
+    }
+}

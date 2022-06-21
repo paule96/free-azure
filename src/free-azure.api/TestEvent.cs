@@ -31,7 +31,11 @@ namespace free_azure.api
         {
             try
             {
-                var postEvent = await JsonSerializer.DeserializeAsync<Event>(req.Body);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var postEvent = await JsonSerializer.DeserializeAsync<Event>(req.Body, options);
                 if (postEvent.Locations.Any(l => l.Virtual == false))
                 {
                     var query = this.dbContext.Events.FromSqlRaw(@$"
