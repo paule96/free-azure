@@ -10,7 +10,6 @@ namespace free_azure.api.Models
 
         }
         public DbSet<Event> Events { get; set; }
-        // public DbSet<Location> Locations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
