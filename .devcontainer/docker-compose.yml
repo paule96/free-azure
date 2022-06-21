@@ -9,7 +9,7 @@ services:
     command: [
         "/bin/sh",
         "-c",
-        "cd /workspace/ && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && cd /workspace/ && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && dotnet dev-certs https && while sleep 1000; do :; done"
+        "cd /workspaces/free-azure && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && cd /workspaces/free-azure && sudo curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > microsoft.gpg && sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && sudo sh -c 'echo deb [arch=amd64] https://packages.microsoft.com/debian/$$(lsb_release -rs | cut -d'.' -f 1)/prod $$(lsb_release -cs) main > /etc/apt/sources.list.d/dotnetdev.list' && sudo apt-get update && sudo apt-get install azure-functions-core-tools-4 && umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install lts/* 2>&1 && dotnet restore && dotnet dev-certs https && npm install && while sleep 1000; do :; done"
       ]
     # command: ["/bin/sh", "-c", "while sleep 1000; do :; done"]
     user: vscode
