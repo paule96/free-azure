@@ -195,3 +195,91 @@ else
     }
 }
 ```
+
+## Lets deploy
+
+### First configure routes
+
+In the frontend folder you will find a `wwwroot` folder. This folder should contain a file with the name `staticwebapp.config.json`. This configures your the "server". We want to do three things there:
+
+- set our backend framework to `dotnet` in version 6
+- configure that the default behaivior for all routes should be a redirect to `index.html`
+   - That is always the case if you want to deploy an single page application
+- from the route rule, we want one exlusion, that allow us to call the api
+
+An example of this file can look like that:
+
+```json
+{
+    "platform": {
+        "apiRuntime": "dotnet:6.0"
+    },
+    "navigationFallback": {
+        "rewrite": "/index.html",
+        "exclude": [
+            "/api/*"
+        ]
+    }
+}
+```
+
+### prepare deployment
+
+To be able to deploy we need to create a resource group and in this resource group a cosmos db.
+
+After this we need to change the configuration of the file `swa-cli.config.json`.
+In this file we must define the new name of our webapp and the resource group we created. It could look like that:
+
+```json
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "free-azure": {
+      "appLocation": "src/free-azure.frontend",
+      "apiLocation": "src/free-azure.api",
+      "outputLocation": "bin/wwwroot",
+      "appBuildCommand": "dotnet publish -c Release -o bin",
+      "apiBuildCommand": "dotnet publish -c Release",
+      "run": "dotnet watch run",
+      "appDevserverUrl": "https://localhost:7120",
+      "appName": "free-azure",
+      "resourceGroupName": "free-azure-rg"
+    }
+  }
+}
+```
+
+### Lets deploy
+
+Now we are ready to deploy. In two steps:
+
+- build
+- deploy
+
+#### build
+
+To build the app run simply:
+
+```bash
+npx swa build
+```
+
+### deploy
+
+```bash
+ npx swa deploy --no-use-keychain --api-location src/free-azure.api/bin/Release/net6.0/publish/
+```
+
+### deploy to production
+
+```bash
+ npx swa deploy --no-use-keychain --api-location src/free-azure.api/bin/Release/net6.0/publish/ --env production
+```
+
+### last step after deployment
+
+Now we must get the connection string from our cosmos db and must add that string as an environment variable in our static webapp. The name of the variable is:
+
+`SqlConnectionString`
+
+If we now open the app we should be ready.
