@@ -1,7 +1,7 @@
 # Free azure demo
 
 This is a repository that shows a demo on how to use azure for free.
-The pptx (german) can be found (here)[docs/.assets/Azure 4 free - für dich, mich.pptx]b
+The pptx (german) can be found [here](docs/.assets/Azure%204%20free%20-%20für%20dich,%20mich.pptx).
 
 ## Step by step guid
 
